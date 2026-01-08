@@ -393,6 +393,17 @@ function showCheckoutModal() {
             
             <div style="margin: 1rem 0; text-align: left;">
                 <label style="color: var(--color-white); font-weight: 600; display: block; margin-bottom: 0.5rem;">
+                    Teléfono de Contacto:
+                </label>
+                <input type="tel" id="modal-customer-phone" required 
+                       style="width: 100%; padding: 0.8rem; border: none; border-radius: 10px; 
+                              background: rgba(255, 255, 255, 0.9); color: #152453; font-weight: 600;
+                              box-sizing: border-box;"
+                       placeholder="55 1234 5678">
+            </div>
+            
+            <div style="margin: 1rem 0; text-align: left;">
+                <label style="color: var(--color-white); font-weight: 600; display: block; margin-bottom: 0.5rem;">
                     Dirección de Entrega:
                 </label>
                 <textarea id="modal-customer-address" required rows="3"
@@ -471,15 +482,16 @@ function showCheckoutModal() {
         e.preventDefault();
         
         const name = document.getElementById('modal-customer-name').value.trim();
+        const phone = document.getElementById('modal-customer-phone').value.trim();
         const address = document.getElementById('modal-customer-address').value.trim();
         
-        if (!name || !address) {
+        if (!name || !phone || !address) {
             alert('Por favor completa todos los campos');
             return;
         }
         
         // Procesar pedido
-        processOrder(name, address);
+        processOrder(name, phone, address);
         modal.remove();
         style.remove();
     });
@@ -494,14 +506,15 @@ function showCheckoutModal() {
 }
 
 // Procesar pedido
-function processOrder(customerName, customerAddress) {
+function processOrder(customerName, customerPhone, customerAddress) {
     const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     
     // Crear datos del pedido
     const orderData = {
         orderId: generateOrderId(),
         customer: { 
-            name: customerName, 
+            name: customerName,
+            phone: customerPhone,
             address: customerAddress,
             email: cartCurrentUser.email 
         },
@@ -517,6 +530,9 @@ function processOrder(customerName, customerAddress) {
     localStorage.setItem('gatito_orders', JSON.stringify(orders));
     
     console.log('📋 Pedido creado:', orderData);
+    
+    // Enviar pedido por email
+    enviarPedidoEmail(orderData);
     
     // Mostrar confirmación
     showOrderConfirmation(orderData);
@@ -585,6 +601,9 @@ function showOrderConfirmation(orderData) {
             </p>
             <p style="margin: 0.5rem 0; color: var(--color-white);">
                 <strong style="color: var(--color-gold);">Cliente:</strong> ${orderData.customer.name}
+            </p>
+            <p style="margin: 0.5rem 0; color: var(--color-white);">
+                <strong style="color: var(--color-gold);">Teléfono:</strong> ${orderData.customer.phone}
             </p>
             <p style="margin: 0.5rem 0; color: var(--color-white);">
                 <strong style="color: var(--color-gold);">Dirección:</strong> ${orderData.customer.address}
@@ -976,3 +995,40 @@ function showConfirmModal(title, message, subtitle, onConfirm) {
 }
 
 console.log('✅ Sistema de carrito completamente cargado');
+
+// Función para enviar pedido por email usando EmailJS
+function enviarPedidoEmail(orderData) {
+    console.log('📧 Enviando pedido por email...', orderData);
+    
+    // Preparar los parámetros para EmailJS
+    const params = {
+        nombre: orderData.customer.name,
+        email: orderData.customer.email,
+        contacto: orderData.customer.phone,
+        direccion: orderData.customer.address,
+        total: `$${orderData.total.toFixed(2)}`,
+        pedido_id: orderData.orderId,
+        pedido: orderData.items.map(item => 
+            `${item.quantity} x ${item.name} - $${(item.price * item.quantity).toFixed(2)}`
+        ).join('\n'),
+        fecha: new Date(orderData.timestamp).toLocaleString('es-MX')
+    };
+    
+    console.log('📧 Parámetros del email:', params);
+    
+    // Enviar email usando EmailJS
+    if (typeof emailjs !== 'undefined') {
+        emailjs.send("service_cztcm8a", "template_5zydgma", params)
+            .then((response) => {
+                console.log('✅ Email enviado correctamente:', response);
+                showMessage('✅ Pedido enviado por email correctamente', 'success');
+            })
+            .catch((error) => {
+                console.error('❌ Error al enviar email:', error);
+                showMessage('⚠️ Pedido guardado, pero hubo un problema al enviar el email', 'info');
+            });
+    } else {
+        console.warn('⚠️ EmailJS no está disponible');
+        showMessage('⚠️ Pedido guardado correctamente', 'info');
+    }
+}
