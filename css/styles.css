@@ -2645,47 +2645,38 @@ body {
 /* Ficha de producto del menú */
 .menu-item-card {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
     background: var(--color-white);
     border-radius: 16px;
     box-shadow: 0 6px 20px rgba(26, 26, 26, 0.1);
     overflow: hidden;
-    transition: all 0.3s ease;
     border: 2px solid var(--color-secondary);
+    padding: 1.25rem;
+    gap: 1rem;
     margin-bottom: 2rem;
-    padding: 1.5rem;
-    gap: 2rem;
-}
-
-.menu-item-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(255, 140, 66, 0.2);
-    border-color: var(--color-accent);
 }
 
 /* Contenedor de imagen del producto */
 .menu-item-image-container {
     flex-shrink: 0;
-    width: 120px;
-    height: 120px;
-    border-radius: 12px;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
     overflow: hidden;
     background: linear-gradient(135deg, var(--color-medio) 0%, var(--color-medioer) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid var(--color-light);
+    margin-bottom: 0.5rem;
 }
 
 .menu-item-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.menu-item-card:hover .menu-item-image {
-    transform: scale(1.1);
 }
 
 /* Información del producto */
@@ -2693,11 +2684,13 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
+    text-align: center;
+    width: 100%;
 }
 
 .menu-item-name {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--color-darker);
     margin: 0;
     font-weight: bold;
@@ -2706,14 +2699,14 @@ body {
 
 .menu-item-description {
     color: var(--color-dark);
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.4;
     margin: 0;
     opacity: 0.8;
 }
 
 .menu-item-price {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: var(--color-orange-dark);
     font-weight: bold;
     margin: 0.5rem 0;
@@ -2724,17 +2717,17 @@ body {
     background: linear-gradient(135deg, #d4a373 0%, var(--color-orange-dark) 100%);
     color: var(--color-white);
     border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 25px;
-    font-size: 0.95rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     box-shadow: 0 4px 12px rgba(255, 140, 66, 0.3);
-    align-self: flex-start;
-    min-width: 180px;
+    align-self: center;
+    min-width: 160px;
 }
 
 .add-to-cart-btn:hover {
@@ -2764,6 +2757,26 @@ body {
     
     .menu-item-info {
         align-items: center;
+    }
+    
+    .menu-item-name {
+        font-size: 1.3rem;
+    }
+    
+    .menu-item-description {
+        font-size: 0.9rem;
+    }
+    
+    .menu-item-price {
+        font-size: 1.3rem;
+    }
+    
+    .add-to-cart-btn {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.9rem;
+        min-width: 160px;
+    }
+}n-items: center;
         text-align: center;
     }
     
@@ -2823,6 +2836,10 @@ body {
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
+    .menu-products-container {
+        gap: 1.5rem;
+    }
+    
     .menu-item-card {
         gap: 1.5rem;
     }
@@ -3302,4 +3319,35 @@ body {
 
 .cart-items-list::-webkit-scrollbar-thumb:hover {
     background: var(--color-accent);
+}
+
+/* Forzar grid de 2 columnas en pantallas grandes */
+@media (min-width: 768px) {
+    .menu-item-card {
+        margin: 0 !important;
+        width: 100% !important;
+    }
+}
+
+/* Asegurar que el grid funcione correctamente */
+.products-section .menu-item-card {
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+}
+/* Sobrescribir el grid del products-container solo para páginas de menú */
+.menu-page .products-section .products-container {
+    display: block !important;
+    grid-template-columns: none !important;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.menu-page .products-section .products-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    width: 100%;
+    font-size: 2.5rem;
+    color: var(--color-darker);
+    font-weight: 800;
 }
