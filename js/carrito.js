@@ -17,6 +17,11 @@ const PRODUCTS_DATABASE = {
     'tamal-queso': { name: 'Tamal de Queso', price: 22.00, image: 'images/tamal.png' },
     'tamal-dulce': { name: 'Tamal Dulce', price: 20.00, image: 'images/tamal.png' },
     'tamal-oaxaqueno': { name: 'Tamal Oaxaqueño', price: 35.00, image: 'images/tamal.png' },
+    'tamal-rajas': { name: 'Tamal de Rajas con Queso', price: 26.00, image: 'images/tamal.png' },
+    'tamal-frijol': { name: 'Tamal de Frijol', price: 24.00, image: 'images/tamal.png' },
+    'tamal-verde': { name: 'Tamal Verde', price: 30.00, image: 'images/tamal.png' },
+    'tamal-mole': { name: 'Tamal de Mole', price: 32.00, image: 'images/tamal.png' },
+    'tamal-elote': { name: 'Tamal de Elote', price: 23.00, image: 'images/tamal.png' },
     
     // Tortas
     'torta-jamon': { name: 'Torta de Jamón', price: 45.00, image: 'images/torta.png' },
@@ -24,13 +29,23 @@ const PRODUCTS_DATABASE = {
     'torta-ahogada': { name: 'Torta Ahogada', price: 50.00, image: 'images/torta.png' },
     'torta-pollo': { name: 'Torta de Pollo', price: 48.00, image: 'images/torta.png' },
     'torta-cubana': { name: 'Torta Cubana', price: 65.00, image: 'images/torta.png' },
+    'torta-carnitas': { name: 'Torta de Carnitas', price: 52.00, image: 'images/torta.png' },
+    'torta-chorizo': { name: 'Torta de Chorizo', price: 47.00, image: 'images/torta.png' },
+    'torta-pastor': { name: 'Torta de Pastor', price: 49.00, image: 'images/torta.png' },
+    'torta-quesadilla': { name: 'Torta Quesadilla', price: 44.00, image: 'images/torta.png' },
+    'torta-lomo': { name: 'Torta de Lomo', price: 58.00, image: 'images/torta.png' },
     
     // Dulces
     'cocadas': { name: 'Cocadas', price: 15.00, image: 'images/dulce.png' },
     'alegrias': { name: 'Alegrías', price: 18.00, image: 'images/dulce.png' },
     'palanquetas': { name: 'Palanquetas', price: 12.00, image: 'images/dulce.png' },
     'jamoncillos': { name: 'Jamoncillos', price: 20.00, image: 'images/dulce.png' },
-    'mueganos': { name: 'Muéganos', price: 16.00, image: 'images/dulce.png' }
+    'mueganos': { name: 'Muéganos', price: 16.00, image: 'images/dulce.png' },
+    'obleas': { name: 'Obleas con Cajeta', price: 14.00, image: 'images/dulce.png' },
+    'mazapan': { name: 'Mazapán', price: 10.00, image: 'images/dulce.png' },
+    'pepitorias': { name: 'Pepitorias', price: 17.00, image: 'images/dulce.png' },
+    'borrachitos': { name: 'Borrachitos', price: 19.00, image: 'images/dulce.png' },
+    'gaznates': { name: 'Gaznates', price: 21.00, image: 'images/dulce.png' }
 };
 
 // Inicialización
