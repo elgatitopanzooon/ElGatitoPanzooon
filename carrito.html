@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Carrito de Compras - El Gatito Panzón. Revisa tus productos y realiza tu pedido.">
+    <meta name="keywords" content="carrito, compras, pedido, El Gatito Panzón, tamales, tortas, dulces">
+    <meta name="author" content="El Gatito Panzón">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <title>Carrito de Compras - El Gatito Panzón</title>
+    
+    <!-- Enlaces a archivos CSS -->
+    <link rel="stylesheet" href="css/styles.css?v=8.0">
+    
+    <!-- Estilos mejorados para el carrito -->
+    <style>
+        /* Forzar actualización de estilos */
+        .auth-section {
+            background: linear-gradient(135deg, #152453 0%, #364277 50%, #4e598c 100%) !important;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+        .auth-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .auth-logo {
+            max-width: 80px !important;
+            height: 80px !important;
+            border-radius: 50% !important;
+            box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4) !important;
+            border: 3px solid var(--color-gold) !important;
+            transition: all 0.3s ease !important;
+            object-fit: cover !important;
+            margin: 0 auto !important;
+            display: block !important;
+        }
+        
+        .auth-title {
+            color: var(--color-white) !important;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin: 1.5rem 0 0.5rem 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .auth-subtitle {
+            color: rgba(255, 255, 255, 0.9) !important;
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-btn {
+            padding: 1rem 2rem !important;
+            border: none !important;
+            border-radius: 15px !important;
+            font-size: 1rem !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.75rem !important;
+            min-height: 52px !important;
+            position: relative !important;
+            overflow: hidden !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+            backdrop-filter: blur(10px) !important;
+        }
+        
+        .auth-btn.primary {
+            background: linear-gradient(135deg, #d4a373 0%, var(--color-orange-dark) 100%) !important;
+            color: var(--color-white) !important;
+            box-shadow: 0 6px 25px rgba(255, 140, 66, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+        
+        .auth-btn.secondary {
+            background: linear-gradient(135deg, var(--color-orange-dark) 0%, var(--color-primary) 50%, #d4a373 100%) !important;
+            color: var(--color-white) !important;
+            box-shadow: 0 6px 25px rgba(255, 140, 66, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+        
+        .auth-btn.outline {
+            background: rgba(255, 255, 255, 0.15) !important;
+            color: var(--color-white) !important;
+            border: 2px solid rgba(255, 255, 255, 0.4) !important;
+            backdrop-filter: blur(15px) !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
+        }
+        
+        .auth-btn.danger {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+            color: var(--color-white) !important;
+            box-shadow: 0 6px 25px rgba(220, 53, 69, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+        
+        /* Efectos hover */
+        .auth-btn.primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--color-orange-dark) 0%, var(--color-accent) 100%) !important;
+            transform: translateY(-4px) scale(1.02) !important;
+            box-shadow: 0 12px 35px rgba(255, 140, 66, 0.5) !important;
+        }
+        
+        .auth-btn.secondary:hover {
+            background: linear-gradient(135deg, #d4a373 0%, var(--color-primary) 50%, var(--color-orange-dark) 100%) !important;
+            transform: translateY(-4px) scale(1.02) !important;
+            box-shadow: 0 12px 35px rgba(255, 140, 66, 0.5) !important;
+        }
+        
+        .auth-btn.outline:hover {
+            background: rgba(255, 255, 255, 0.25) !important;
+            color: var(--color-white) !important;
+            transform: translateY(-4px) scale(1.02) !important;
+            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.6) !important;
+        }
+        
+        .auth-btn.danger:hover {
+            background: linear-gradient(135deg, #c82333 0%, #a71e2a 100%) !important;
+            transform: translateY(-4px) scale(1.02) !important;
+            box-shadow: 0 12px 35px rgba(220, 53, 69, 0.6) !important;
+        }
+        
+        .auth-logo:hover {
+            transform: scale(1.08) !important;
+            box-shadow: 0 8px 25px rgba(255, 140, 66, 0.5) !important;
+        }
+        
+        /* Estilos específicos del carrito mejorados */
+        .cart-item {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-item:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+        
+        .cart-item img {
+            width: 90px;
+            height: 90px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cart-item-info {
+            flex: 1;
+            color: #152453; /* Azul marino como el fondo */
+        }
+        
+        .cart-item-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 0 0 0.8rem 0;
+            color: #d4a373 !important; /* Naranja como en la página */
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cart-item-price {
+            font-size: 1.1rem;
+            color: #d4a373 !important; /* Naranja como en la página */
+            margin: 0;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .quantity-btn {
+            background: linear-gradient(135deg, var(--color-orange-dark) 0%, #d4a373 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .quantity-btn:hover {
+            background: linear-gradient(135deg, #d4a373 0%, var(--color-orange-dark) 100%);
+            transform: scale(1.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .quantity-display {
+            color: #152453 !important; /* Azul marino como el fondo */
+            font-weight: 900;
+            min-width: 35px;
+            text-align: center;
+            font-size: 1.3rem;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+        
+        .cart-item-total {
+            color: #d4a373 !important; /* Naranja como en la página */
+            font-weight: 900;
+            font-size: 1.3rem;
+            margin: 0 1rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .cart-total {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+            border: 3px solid var(--color-gold);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .cart-total p {
+            color: #152453 !important; /* Azul marino como el fondo */
+            margin: 0 0 1rem 0 !important;
+            font-size: 1.3rem !important;
+            font-weight: 600 !important;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5) !important;
+        }
+        
+        .total-amount {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #d4a373 !important; /* Naranja como en la página para el precio total */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #152453; /* Azul marino como el fondo de la página */
+        }
+        
+        .empty-cart-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        .empty-cart h3 {
+            color: #152453 !important; /* Azul marino para el título */
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+        
+        .empty-cart p {
+            color: #152453 !important; /* Azul marino para el texto descriptivo */
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+        
+        .remove-btn {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+        }
+        
+        .remove-btn:hover {
+            background: linear-gradient(135deg, #c82333 0%, #a71e2a 100%);
+            transform: scale(1.15);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.5);
+        }
+        
+        /* Mejorar formularios */
+        .form-title {
+            color: #152453 !important; /* Azul marino para títulos dentro del carrito */
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Título específico para el contenedor de productos del carrito */
+        #cart-items-container .form-title {
+            color: #152453 !important; /* Azul marino como el fondo */
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Clase para forzar ocultamiento */
+        .force-hidden {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            overflow: hidden !important;
+        }
+        
+        /* Mensajes de estado mejorados */
+        .auth-message {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 12px !important;
+            padding: 1rem 1.5rem !important;
+            margin: 1rem 0 !important;
+            backdrop-filter: blur(10px) !important;
+            font-weight: 600 !important;
+            text-align: center !important;
+        }
+        
+        /* Responsive design mejorado */
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .cart-item-controls {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .auth-container {
+                padding: 0 0.5rem;
+            }
+            
+            .cart-item {
+                padding: 1.5rem;
+                margin: 1rem 0;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <!-- Estructura base de la página -->
+    <header class="navbar" role="banner">
+        <!-- Barra de navegación superior -->
+        <nav class="navbar-container" role="navigation" aria-label="Navegación principal">
+            <div class="navbar-left">
+                <a href="index.html" class="navbar-brand">
+                    <h1 class="navbar-brand">El Gatito Panzón</h1>
+                </a>
+            </div>
+            <div class="navbar-right">
+                <a href="index.html" class="navbar-link" role="button" aria-label="Volver al inicio">🏠 Inicio</a>
+                <a href="login.html" class="navbar-link" id="login-link" role="button" aria-label="Iniciar sesión en tu cuenta">👤 Inicio de Sesión</a>
+                <div class="user-menu" id="user-menu" style="display: none;">
+                    <span class="user-greeting" id="user-greeting">👤 Hola, Usuario</span>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <a href="login.html" class="dropdown-item">Mi Cuenta</a>
+                        <button class="dropdown-item logout-btn" id="navbar-logout">Cerrar Sesión</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="main-content" role="main">
+        <!-- Sección del carrito -->
+        <section class="auth-section" aria-labelledby="cart-title">
+            <div class="auth-container">
+                <!-- Logo pequeño -->
+                <div class="auth-logo-container">
+                    <img src="images/logo.png" alt="Logo de El Gatito Panzón" class="auth-logo">
+                </div>
+                
+                <!-- Título principal -->
+                <h2 class="auth-title" id="cart-title">Carrito de Compras</h2>
+                <p class="auth-subtitle">Revisa tus productos y completa tu pedido</p>
+                
+                <!-- Mensajes de estado -->
+                <div id="cart-message" class="auth-message" style="display: none;" role="alert"></div>
+                
+                <!-- Contenedor del carrito -->
+                <div class="auth-forms">
+                    <!-- Carrito vacío -->
+                    <div class="auth-form-container" id="empty-cart-container">
+                        <div class="empty-cart">
+                            <div class="empty-cart-icon">🛒</div>
+                            <h3 class="form-title">Tu carrito está vacío</h3>
+                            <p>Agrega productos desde nuestros menús para comenzar tu pedido</p>
+                            <div style="margin-top: 2rem;">
+                                <a href="index.html" class="auth-btn secondary">🍽️ Ver Menús</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Carrito con productos -->
+                    <div class="auth-form-container" id="cart-items-container" style="display: none;">
+                        <h3 class="form-title">Tus Productos</h3>
+                        
+                        <!-- Lista de productos -->
+                        <div id="cart-items-list">
+                            <!-- Los productos se cargarán dinámicamente aquí -->
+                        </div>
+                        
+                        <!-- Total -->
+                        <div class="cart-total">
+                            <p style="color: #152453; margin: 0 0 0.5rem 0; font-size: 1.2rem; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);">Total a pagar:</p>
+                            <div class="total-amount" id="cart-total-amount">$0.00</div>
+                        </div>
+                        
+                        <!-- Botones de acción -->
+                        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                            <button type="button" class="auth-btn danger" onclick="clearCart()">🗑️ Vaciar Carrito</button>
+                            <button type="button" class="auth-btn primary" onclick="proceedToCheckout()">💳 Proceder al Pago</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; 2024 El Gatito Panzón. Todos los derechos reservados.</p>
+            <p>Comida tradicional mexicana en Ecatepec y Coacalco</p>
+        </div>
+    </footer>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+    <script>
+      // Configuración de Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyCGO_EAAEfOFCCzkg4C-1Lo9as9feFOrDo",
+        authDomain: "elgatitopanzoon.firebaseapp.com",
+        projectId: "elgatitopanzoon",
+        storageBucket: "elgatitopanzoon.firebasestorage.app",
+        messagingSenderId: "248328568972",
+        appId: "1:248328568972:web:56ca92b059f2d05e087ba9",
+        measurementId: "G-XMHRPNKKBS"
+      };
+
+      // Inicializar Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <!-- JavaScript del carrito -->
+    <script src="js/navbar-auth.js"></script>
+    <script src="js/carrito.js"></script>
+    
+    <!-- Verificación de carga del sistema -->
+    <script>
+        // Verificar que el sistema de carrito esté funcionando
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔍 Verificando sistema de carrito...');
+            console.log('✅ window.addToCart disponible:', typeof window.addToCart === 'function');
+            console.log('✅ Firebase disponible:', typeof firebase !== 'undefined');
+            
+            // Verificar elementos del DOM
+            const containers = [
+                'empty-cart-container',
+                'cart-items-container', 
+                'checkout-form-container',
+                'order-confirmation-container'
+            ];
+            
+            containers.forEach(id => {
+                const element = document.getElementById(id);
+                console.log(`✅ Elemento ${id}:`, element ? 'Encontrado' : 'No encontrado');
+            });
+            
+            console.log('🎯 Sistema de carrito listo para usar');
+        });
+    </script>
+</body>
+</html>

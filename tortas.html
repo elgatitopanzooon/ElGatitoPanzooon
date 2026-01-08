@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Menú de Tortas - El Gatito Panzón. Deliciosas tortas mexicanas con ingredientes frescos y pan artesanal.">
+    <meta name="keywords" content="tortas, comida mexicana, El Gatito Panzón, pan artesanal, ingredientes frescos, Ecatepec, Coacalco">
+    <meta name="author" content="El Gatito Panzón">
+    <meta name="robots" content="index, follow">
+    
+    <title>Menú de Tortas - El Gatito Panzón</title>
+    
+    <!-- Enlaces a archivos CSS -->
+    <link rel="stylesheet" href="css/styles.css?v=8.0">
+    
+</head>
+<body>
+    <!-- Estructura base de la página -->
+    <header class="navbar" role="banner">
+        <!-- Barra de navegación superior -->
+        <nav class="navbar-container" role="navigation" aria-label="Navegación principal">
+            <div class="navbar-left">
+                <a href="index.html" class="navbar-brand">
+                    <h1 class="navbar-brand">El Gatito Panzón</h1>
+                </a>
+            </div>
+            <div class="navbar-right">
+                <a href="login.html" class="navbar-link" id="login-link" role="button" aria-label="Iniciar sesión en tu cuenta">👤 Inicio de Sesión</a>
+                <div class="user-menu" id="user-menu" style="display: none;">
+                    <span class="user-greeting" id="user-greeting">👤 Hola, Usuario</span>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <a href="login.html" class="dropdown-item">Mi Cuenta</a>
+                        <button class="dropdown-item logout-btn" id="navbar-logout">Cerrar Sesión</button>
+                    </div>
+                </div>
+                <a href="carrito.html" class="navbar-link" id="cart-link" role="button" aria-label="Ver carrito de compras">🛒 Carrito</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="main-content" role="main">
+        <!-- Sección principal con título -->
+        <section class="hero-section" aria-labelledby="hero-title">
+            <div class="hero-container">
+                <div class="title-container">
+                    <h2 class="hero-title" id="hero-title">Menú de Tortas</h2>
+                    <p class="hero-subtitle">Tortas mexicanas con ingredientes frescos y pan artesanal</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección de productos -->
+        <section class="products-section" aria-labelledby="products-title">
+            <div class="products-container">
+                <div class="menu-products-container">
+                    <h3 class="products-title" id="products-title">Nuestras Tortas</h3>
+                    
+                    <!-- Producto 1 -->
+                    <article class="menu-item-card" role="article" aria-labelledby="product-1-title">
+                        <div class="menu-item-image-container">
+                            <img src="images/torta.png" alt="Torta de Jamón" class="menu-item-image">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4 class="menu-item-name" id="product-1-title">Torta de Jamón</h4>
+                            <p class="menu-item-description">Clásica torta con jamón, frijoles, aguacate, jitomate y lechuga</p>
+                            <div class="menu-item-price">$45.00</div>
+                            <button class="add-to-cart-btn" data-product="torta-jamon" aria-label="Agregar Torta de Jamón al carrito">
+                                🛒 Agregar al Carrito
+                            </button>
+                        </div>
+                    </article>
+                    
+                    <!-- Producto 2 -->
+                    <article class="menu-item-card" role="article" aria-labelledby="product-2-title">
+                        <div class="menu-item-image-container">
+                            <img src="images/torta.png" alt="Torta de Milanesa" class="menu-item-image">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4 class="menu-item-name" id="product-2-title">Torta de Milanesa</h4>
+                            <p class="menu-item-description">Torta con milanesa de res empanizada, frijoles y verduras frescas</p>
+                            <div class="menu-item-price">$55.00</div>
+                            <button class="add-to-cart-btn" data-product="torta-milanesa" aria-label="Agregar Torta de Milanesa al carrito">
+                                🛒 Agregar al Carrito
+                            </button>
+                        </div>
+                    </article>
+                    
+                    <!-- Producto 3 -->
+                    <article class="menu-item-card" role="article" aria-labelledby="product-3-title">
+                        <div class="menu-item-image-container">
+                            <img src="images/torta.png" alt="Torta Ahogada" class="menu-item-image">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4 class="menu-item-name" id="product-3-title">Torta Ahogada</h4>
+                            <p class="menu-item-description">Torta de carnitas bañada en salsa de jitomate picante tradicional</p>
+                            <div class="menu-item-price">$50.00</div>
+                            <button class="add-to-cart-btn" data-product="torta-ahogada" aria-label="Agregar Torta Ahogada al carrito">
+                                🛒 Agregar al Carrito
+                            </button>
+                        </div>
+                    </article>
+                    
+                    <!-- Producto 4 -->
+                    <article class="menu-item-card" role="article" aria-labelledby="product-4-title">
+                        <div class="menu-item-image-container">
+                            <img src="images/torta.png" alt="Torta de Pollo" class="menu-item-image">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4 class="menu-item-name" id="product-4-title">Torta de Pollo</h4>
+                            <p class="menu-item-description">Torta con pechuga de pollo asada, aguacate y vegetales frescos</p>
+                            <div class="menu-item-price">$48.00</div>
+                            <button class="add-to-cart-btn" data-product="torta-pollo" aria-label="Agregar Torta de Pollo al carrito">
+                                🛒 Agregar al Carrito
+                            </button>
+                        </div>
+                    </article>
+                    
+                    <!-- Producto 5 -->
+                    <article class="menu-item-card" role="article" aria-labelledby="product-5-title">
+                        <div class="menu-item-image-container">
+                            <img src="images/torta.png" alt="Torta Cubana" class="menu-item-image">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4 class="menu-item-name" id="product-5-title">Torta Cubana</h4>
+                            <p class="menu-item-description">La reina de las tortas: jamón, milanesa, salchicha, queso y aguacate</p>
+                            <div class="menu-item-price">$65.00</div>
+                            <button class="add-to-cart-btn" data-product="torta-cubana" aria-label="Agregar Torta Cubana al carrito">
+                                🛒 Agregar al Carrito
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; 2024 El Gatito Panzón. Todos los derechos reservados.</p>
+            <p>Comida tradicional mexicana en Ecatepec y Coacalco</p>
+        </div>
+    </footer>
+    
+    <!-- Firebase SDKs para detectar autenticación -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+    <script>
+      // Configuración de Firebase (misma que en login.html)
+      const firebaseConfig = {
+        apiKey: "AIzaSyCGO_EAAEfOFCCzkg4C-1Lo9as9feFOrDo",
+        authDomain: "elgatitopanzoon.firebaseapp.com",
+        projectId: "elgatitopanzoon",
+        storageBucket: "elgatitopanzoon.firebasestorage.app",
+        messagingSenderId: "248328568972",
+        appId: "1:248328568972:web:56ca92b059f2d05e087ba9",
+        measurementId: "G-XMHRPNKKBS"
+      };
+
+      // Inicializar Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <!-- JavaScript -->
+    <script src="js/navbar-auth.js"></script>
+    <script src="js/carrito.js"></script>
+    <script>
+        // Configurar botones de agregar al carrito - Versión mejorada
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔘 Configurando botones de carrito en tortas.html');
+            
+            // Esperar a que el script de carrito esté completamente cargado
+            function waitForCartScript() {
+                if (typeof window.addToCart === 'function') {
+                    console.log('✅ Script de carrito cargado, configurando botones');
+                    setupCartButtons();
+                } else {
+                    console.log('⏳ Esperando script de carrito...');
+                    setTimeout(waitForCartScript, 100);
+                }
+            }
+            
+            // Función para configurar los botones
+            function setupCartButtons() {
+                const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+                console.log(`🔍 Encontrados ${addToCartButtons.length} botones de carrito`);
+                
+                addToCartButtons.forEach((button, index) => {
+                    const productId = button.getAttribute('data-product');
+                    console.log(`🔘 Configurando botón ${index + 1}: ${productId}`);
+                    
+                    // Remover listeners anteriores
+                    button.onclick = null;
+                    
+                    // Agregar nuevo listener
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log(`🖱️ Clic en botón de carrito: ${productId}`);
+                        
+                        if (typeof window.addToCart === 'function') {
+                            console.log('✅ Llamando a window.addToCart');
+                            window.addToCart(productId);
+                        } else {
+                            console.error('❌ Función addToCart no disponible');
+                            console.log('🔍 Verificando window:', Object.keys(window).filter(k => k.includes('add') || k.includes('cart')));
+                            alert('Error: Sistema de carrito no disponible. Recarga la página.');
+                        }
+                    });
+                });
+            }
+            
+            // Iniciar configuración
+            waitForCartScript();
+        });
+    </script>
+</body>
+</html>

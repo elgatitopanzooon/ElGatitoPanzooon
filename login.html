@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Iniciar sesión o crear cuenta en El Gatito Panzón - Accede a tu cuenta para realizar pedidos">
+    <meta name="keywords" content="login, registro, cuenta, El Gatito Panzón, iniciar sesión">
+    <meta name="author" content="El Gatito Panzón">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <title>Iniciar Sesión - El Gatito Panzón</title>
+    
+    <!-- Enlaces a archivos CSS -->
+    <link rel="stylesheet" href="css/styles.css?v=8.0">
+    
+    <!-- Estilos adicionales para forzar actualización -->
+    <style>
+        /* Forzar actualización de estilos */
+        .auth-section {
+            background: linear-gradient(135deg, #152453 0%, #364277 50%, #4e598c 100%) !important;
+        }
+        .auth-logo {
+            max-width: 80px !important;
+            height: 80px !important;
+            border-radius: 50% !important;
+            box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4) !important;
+            border: 3px solid var(--color-gold) !important;
+            transition: all 0.3s ease !important;
+            object-fit: cover !important;
+            margin: 0 auto !important;
+            display: block !important;
+        }
+        
+        .auth-btn {
+            padding: 1rem 2rem !important;
+            border: none !important;
+            border-radius: 15px !important;
+            font-size: 1rem !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.75rem !important;
+            min-height: 52px !important;
+            position: relative !important;
+            overflow: hidden !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+            backdrop-filter: blur(10px) !important;
+        }
+        
+        .auth-btn.primary {
+            background: linear-gradient(135deg, #d4a373 0%, var(--color-orange-dark) 100%) !important;
+            color: var(--color-white) !important;
+            box-shadow: 0 6px 25px rgba(255, 140, 66, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+        
+        .auth-btn.secondary {
+            background: linear-gradient(135deg, var(--color-orange-dark) 0%, var(--color-primary) 50%, #d4a373 100%) !important;
+            color: var(--color-white) !important;
+            box-shadow: 0 6px 25px rgba(255, 140, 66, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+        
+        .auth-btn.outline {
+            background: rgba(255, 255, 255, 0.15) !important;
+            color: var(--color-darker) !important;
+            border: 2px solid var(--color-secondary) !important;
+            backdrop-filter: blur(15px) !important;
+            box-shadow: 0 6px 20px rgba(96, 108, 56, 0.2) !important;
+        }
+        
+        .switch-btn {
+            background: linear-gradient(135deg, rgba(212, 163, 115, 0.1) 0%, rgba(255, 140, 66, 0.1) 100%) !important;
+            border: 2px solid #d4a373 !important;
+            color: #d4a373 !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            font-size: 0.9rem !important;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            padding: 0.6rem 1.5rem !important;
+            border-radius: 12px !important;
+            position: relative !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            backdrop-filter: blur(10px) !important;
+            box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3) !important;
+            overflow: hidden !important;
+        }
+        
+        /* Efectos hover */
+        .auth-btn.primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--color-orange-dark) 0%, var(--color-accent) 100%) !important;
+            transform: translateY(-4px) scale(1.02) !important;
+            box-shadow: 0 12px 35px rgba(255, 140, 66, 0.5) !important;
+        }
+        
+        .auth-btn.secondary:hover {
+            background: linear-gradient(135deg, #d4a373 0%, var(--color-primary) 50%, var(--color-orange-dark) 100%) !important;
+            transform: translateY(-4px) scale(1.02) !important;
+            box-shadow: 0 12px 35px rgba(255, 140, 66, 0.5) !important;
+        }
+        
+        .auth-btn.outline:hover {
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent) 100%) !important;
+            color: var(--color-white) !important;
+            transform: translateY(-4px) scale(1.02) !important;
+            box-shadow: 0 12px 35px rgba(96, 108, 56, 0.4) !important;
+            border-color: var(--color-accent) !important;
+        }
+        
+        .switch-btn:hover {
+            color: var(--color-white) !important;
+            background: linear-gradient(135deg, #d4a373 0%, var(--color-orange-dark) 100%) !important;
+            transform: translateY(-3px) scale(1.05) !important;
+            box-shadow: 0 8px 25px rgba(255, 140, 66, 0.4) !important;
+            border-color: var(--color-orange-dark) !important;
+        }
+        
+        .auth-logo:hover {
+            transform: scale(1.08) !important;
+            box-shadow: 0 8px 25px rgba(255, 140, 66, 0.5) !important;
+        }
+    </style>
+    
+</head>
+<body>
+    <!-- Estructura base de la página -->
+    <header class="navbar" role="banner">
+        <!-- Barra de navegación superior -->
+        <nav class="navbar-container" role="navigation" aria-label="Navegación principal">
+            <div class="navbar-left">
+                <a href="index.html" class="navbar-brand">
+                    <h1 class="navbar-brand">El Gatito Panzón</h1>
+                </a>
+            </div>
+            <div class="navbar-right">
+                <a href="index.html" class="navbar-link" role="button" aria-label="Volver al inicio">🏠 Inicio</a>
+                <a href="carrito.html" class="navbar-link" id="cart-link" role="button" aria-label="Ver carrito de compras">🛒 Carrito</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="main-content" role="main">
+        <!-- Sección de autenticación -->
+        <section class="auth-section" aria-labelledby="auth-title">
+            <div class="auth-container">
+                <!-- Logo pequeño -->
+                <div class="auth-logo-container">
+                    <img src="images/logo.png" alt="Logo de El Gatito Panzón" class="auth-logo">
+                </div>
+                
+                <!-- Título principal -->
+                <h2 class="auth-title" id="auth-title">Bienvenido a El Gatito Panzón</h2>
+                <p class="auth-subtitle">Inicia sesión o crea tu cuenta para continuar</p>
+                
+                <!-- Mensajes de estado -->
+                <div id="auth-message" class="auth-message" style="display: none;" role="alert"></div>
+                
+                <!-- Formularios de autenticación -->
+                <div class="auth-forms">
+                    <!-- Formulario de inicio de sesión -->
+                    <div class="auth-form-container" id="login-form-container">
+                        <h3 class="form-title">Iniciar Sesión</h3>
+                        <form id="login-form" class="auth-form" novalidate>
+                            <div class="form-group">
+                                <label for="login-email" class="form-label">Correo Electrónico</label>
+                                <input type="email" id="login-email" name="email" class="form-input" required 
+                                       placeholder="tu@email.com" aria-describedby="login-email-error">
+                                <span id="login-email-error" class="form-error" role="alert"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="login-password" class="form-label">Contraseña</label>
+                                <input type="password" id="login-password" name="password" class="form-input" required 
+                                       placeholder="Tu contraseña" aria-describedby="login-password-error">
+                                <span id="login-password-error" class="form-error" role="alert"></span>
+                            </div>
+                            
+                            <button type="submit" class="auth-btn primary" id="login-btn">
+                                <span class="btn-text">Iniciar Sesión</span>
+                                <span class="btn-loading" style="display: none;">Iniciando...</span>
+                            </button>
+                        </form>
+                        
+                        <p class="form-switch">
+                            ¿No tienes cuenta? 
+                            <button type="button" class="switch-btn" id="show-register">Crear cuenta</button>
+                        </p>
+                    </div>
+                    
+                    <!-- Formulario de registro -->
+                    <div class="auth-form-container" id="register-form-container" style="display: none;">
+                        <h3 class="form-title">Crear Cuenta</h3>
+                        <form id="register-form" class="auth-form" novalidate>
+                            <div class="form-group">
+                                <label for="register-name" class="form-label">Nombre Completo</label>
+                                <input type="text" id="register-name" name="name" class="form-input" required 
+                                       placeholder="Tu nombre completo" aria-describedby="register-name-error">
+                                <span id="register-name-error" class="form-error" role="alert"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="register-email" class="form-label">Correo Electrónico</label>
+                                <input type="email" id="register-email" name="email" class="form-input" required 
+                                       placeholder="tu@email.com" aria-describedby="register-email-error">
+                                <span id="register-email-error" class="form-error" role="alert"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="register-password" class="form-label">Contraseña</label>
+                                <input type="password" id="register-password" name="password" class="form-input" required 
+                                       placeholder="Mínimo 6 caracteres" aria-describedby="register-password-error">
+                                <span id="register-password-error" class="form-error" role="alert"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="register-confirm-password" class="form-label">Confirmar Contraseña</label>
+                                <input type="password" id="register-confirm-password" name="confirmPassword" class="form-input" required 
+                                       placeholder="Repite tu contraseña" aria-describedby="register-confirm-password-error">
+                                <span id="register-confirm-password-error" class="form-error" role="alert"></span>
+                            </div>
+                            
+                            <button type="submit" class="auth-btn primary" id="register-btn">
+                                <span class="btn-text">Crear Cuenta</span>
+                                <span class="btn-loading" style="display: none;">Creando...</span>
+                            </button>
+                        </form>
+                        
+                        <p class="form-switch">
+                            ¿Ya tienes cuenta? 
+                            <button type="button" class="switch-btn" id="show-login">Iniciar sesión</button>
+                        </p>
+                    </div>
+                    
+                    <!-- Panel de usuario autenticado -->
+                    <div class="user-panel" id="user-panel" style="display: none;">
+                        <div class="user-info">
+                            <div class="user-avatar">👤</div>
+                            <div class="user-details">
+                                <h3 class="user-name" id="user-name">Usuario</h3>
+                                <p class="user-email" id="user-email">email@ejemplo.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="user-actions">
+                            <a href="index.html" class="auth-btn secondary">Ir al Inicio</a>
+                            <button type="button" class="auth-btn outline" id="logout-btn">Cerrar Sesión</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; 2024 El Gatito Panzón. Todos los derechos reservados.</p>
+            <p>Comida tradicional mexicana en Ecatepec y Coacalco</p>
+        </div>
+    </footer>
+    
+    <!-- Firebase SDKs (versión compat, sin módulos) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+    <script>
+      // Tu configuración de Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyCGO_EAAEfOFCCzkg4C-1Lo9as9feFOrDo",
+        authDomain: "elgatitopanzoon.firebaseapp.com",
+        projectId: "elgatitopanzoon",
+        storageBucket: "elgatitopanzoon.firebasestorage.app",
+        messagingSenderId: "248328568972",
+        appId: "1:248328568972:web:56ca92b059f2d05e087ba9",
+        measurementId: "G-XMHRPNKKBS"
+      };
+
+      // Inicializar Firebase
+      try {
+        firebase.initializeApp(firebaseConfig);
+        console.log('Firebase inicializado correctamente');
+        console.log('Configuración:', firebaseConfig);
+        
+        // Verificar que Auth esté disponible
+        setTimeout(() => {
+          try {
+            const auth = firebase.auth();
+            console.log('Firebase Auth disponible:', !!auth);
+            console.log('Usuario actual:', auth.currentUser);
+          } catch (authError) {
+            console.error('Error al acceder a Firebase Auth:', authError);
+          }
+        }, 1000);
+        
+      } catch (error) {
+        console.error('Error al inicializar Firebase:', error);
+      }
+    </script>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

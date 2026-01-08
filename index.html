@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="El Gatito Panzón - Deliciosos tamales, tortas y dulces tradicionales. Encuentra nuestras ubicaciones en Ecatepec y Coacalco. Horarios desde las 6:00 AM.">
+    <meta name="keywords" content="tamales, tortas, dulces, comida mexicana, El Gatito Panzón, Ecatepec, Coacalco, desayuno, antojitos">
+    <meta name="author" content="El Gatito Panzón">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Spanish">
+    <meta name="geo.region" content="MX-MEX">
+    <meta name="geo.placename" content="Ecatepec de Morelos, México">
+    <meta name="geo.position" content="19.600928;-99.047452">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://elgatitopanzon.com/">
+    <meta property="og:title" content="El Gatito Panzón - Tamales, Tortas y Dulces">
+    <meta property="og:description" content="Deliciosos tamales, tortas y dulces tradicionales en Ecatepec y Coacalco. Abierto desde las 6:00 AM.">
+    <meta property="og:image" content="https://elgatitopanzon.com/image/logo.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://elgatitopanzon.com/">
+    <meta property="twitter:title" content="El Gatito Panzón - Tamales, Tortas y Dulces">
+    <meta property="twitter:description" content="Deliciosos tamales, tortas y dulces tradicionales en Ecatepec y Coacalco.">
+    <meta property="twitter:image" content="https://elgatitopanzon.com/image/logo.png">
+    
+    <title>El Gatito Panzón - Tamales, Tortas y Dulces</title>
+    
+    <!-- Enlaces a archivos CSS y JavaScript -->
+    <link rel="stylesheet" href="css/styles.css?v=8.0">
+    
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCINDBknkU2zwMAmOgLfpCnV6F01dfYnbA&callback=initMap" async defer></script>
+</head>
+<body>
+    <!-- Estructura base de la página -->
+    <header class="navbar" role="banner">
+        <!-- Barra de navegación superior -->
+        <nav class="navbar-container" role="navigation" aria-label="Navegación principal">
+            <div class="navbar-left">
+                <h1 class="navbar-brand">El Gatito Panzón</h1>
+            </div>
+            <div class="navbar-right">
+                <a href="login.html" class="navbar-link" id="login-link" role="button" aria-label="Iniciar sesión en tu cuenta">👤 Inicio de Sesión</a>
+                <div class="user-menu" id="user-menu" style="display: none;">
+                    <span class="user-greeting" id="user-greeting">👤 Hola, Usuario</span>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <a href="login.html" class="dropdown-item">Mi Cuenta</a>
+                        <button class="dropdown-item logout-btn" id="navbar-logout">Cerrar Sesión</button>
+                    </div>
+                </div>
+                <a href="carrito.html" class="navbar-link" id="cart-link" role="button" aria-label="Ver carrito de compras">🛒 Carrito</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="main-content" role="main">
+        <!-- Sección principal con logo y título -->
+        <section class="hero-section" aria-labelledby="hero-title">
+            <!-- Logo y nombre de la empresa -->
+            <div class="hero-container">
+                <div class="logo-container">
+                    <img src="images/logo.png" alt="Logo de El Gatito Panzón, restaurante de comida tradicional mexicana" class="hero-logo">
+                </div>
+                <div class="title-container">
+                    <h2 class="hero-title" id="hero-title">El Gatito Panzón</h2>
+                    <p class="hero-subtitle">Deliciosos Tamales, Tortas y Dulces Tradicionales</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección de productos y video -->
+        <section class="products-section" aria-labelledby="products-title">
+            <!-- Fichas de productos y frame de video -->
+            <div class="products-container">
+                <!-- Columna izquierda: Fichas de productos -->
+                <div class="products-left" role="region" aria-label="Categorías de productos">
+                    <h3 class="products-title" id="products-title">Nuestros Productos</h3>
+                    
+                    <!-- Ficha de Tamales -->
+                    <article class="product-card" data-category="tamales" role="article" aria-labelledby="tamales-title">
+                        <div class="product-image-container">
+                            <img src="images/tamal.png" alt="Tamales tradicionales mexicanos recién hechos con masa de maíz" class="product-image">
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name" id="tamales-title">Tamales</h4>
+                            <p class="product-description">Tamales tradicionales hechos con masa de maíz y rellenos caseros</p>
+                            <button class="menu-btn" data-category="tamales" aria-label="Ver menú completo de tamales">📜 Ver Menú</button>
+                        </div>
+                    </article>
+                    
+                    <!-- Ficha de Tortas -->
+                    <article class="product-card" data-category="tortas" role="article" aria-labelledby="tortas-title">
+                        <div class="product-image-container">
+                            <img src="images/torta.png" alt="Tortas mexicanas preparadas con ingredientes frescos y pan artesanal" class="product-image">
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name" id="tortas-title">Tortas</h4>
+                            <p class="product-description">Tortas mexicanas con ingredientes frescos y pan artesanal</p>
+                            <button class="menu-btn" data-category="tortas" aria-label="Ver menú completo de tortas">📜 Ver Menú</button>
+                        </div>
+                    </article>
+                    
+                    <!-- Ficha de Dulces -->
+                    <article class="product-card" data-category="dulces" role="article" aria-labelledby="dulces-title">
+                        <div class="product-image-container">
+                            <img src="images/dulce.png" alt="Dulces tradicionales mexicanos elaborados con recetas familiares" class="product-image">
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name" id="dulces-title">Dulces</h4>
+                            <p class="product-description">Dulces tradicionales mexicanos hechos con recetas familiares</p>
+                            <button class="menu-btn" data-category="dulces" aria-label="Ver menú completo de dulces">📜 Ver Menú</button>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Columna derecha: Frame de video y promociones -->
+                <div class="products-right">
+                    <!-- Frame de video -->
+                    <div class="video-section">
+                        <h3 class="video-title">Conoce Nuestros Productos</h3>
+                        <div class="video-container">
+                            <!-- Video promocional se agregará aquí -->
+                            <!-- El video real se agregará aquí cuando esté disponible -->
+                            <!-- <iframe src="VIDEO_URL" frameborder="0" allowfullscreen></iframe> -->
+                        </div>
+                    </div>
+                    
+                    <!-- Fichas promocionales -->
+                    <div class="promotional-section">
+                        <h3 class="promotional-title">Ofertas Especiales</h3>
+                        
+                        <!-- Ficha promocional 1 -->
+                        <div class="promo-card">
+                            <div class="promo-badge">📢 ¡OFERTA! 📢</div>
+                            <div class="promo-content">
+                                <h4 class="promo-name">Combo Familiar</h4>
+                                <p class="promo-description">6 tamales + 2 tortas + dulces tradicionales</p>
+                                <div class="promo-price">
+                                    <span class="price-old">$180</span>
+                                    <span class="price-new">$150</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Ficha promocional 2 -->
+                        <div class="promo-card">
+                            <div class="promo-badge bestseller">🔥 MÁS VENDIDO 🔥</div>
+                            <div class="promo-content">
+                                <h4 class="promo-name">Tamales de la Casa</h4>
+                                <p class="promo-description">Nuestros tamales más populares con receta secreta</p>
+                                <div class="promo-price">
+                                    <span class="price-new">$25 c/u</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Ficha promocional 3 -->
+                        <div class="promo-card">
+                            <div class="promo-badge special">✨ ESPECIAL ✨</div>
+                            <div class="promo-content">
+                                <h4 class="promo-name">Dulces Artesanales</h4>
+                                <p class="promo-description">Hechos con ingredientes naturales y recetas tradicionales</p>
+                                <div class="promo-price">
+                                    <span class="price-new">Desde $15</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección del mapa -->
+        <section class="map-section" aria-labelledby="map-title">
+            <!-- Google Maps con ubicaciones -->
+            <div class="map-container">
+                <div class="map-header">
+                    <h3 class="map-title" id="map-title">Nuestras Ubicaciones</h3>
+                    <p class="map-subtitle">Visítanos!!</p>
+                </div>
+                
+                <div class="map-wrapper">
+                    <!-- Contenedor del mapa de Google Maps -->
+                    <div id="google-map" class="google-map" role="application" aria-label="Mapa interactivo con ubicaciones de El Gatito Panzón">
+                        <!-- Mapa de Google Maps -->
+                    </div>
+                    
+                    <!-- Lista de ubicaciones como respaldo -->
+                    <aside class="locations-list" role="complementary" aria-labelledby="locations-title">
+                        <h4 class="locations-title" id="locations-title">Nuestros Puntos de Venta</h4>
+                        <div class="location-item" data-lat="19.614807100555986" data-lng="-99.00600436056601" role="button" tabindex="0" aria-label="Ubicación de tamales en Ecatepec">
+                            <div class="location-marker" aria-hidden="true">📍</div>
+                            <div class="location-info">
+                                <h5 class="location-name">TAMALES</h5>
+                                <p class="location-address">México-texcoco S/N, Santa Cruz Venta de Carpio, 55060 Ecatepec de Morelos, Méx.</p>
+                                <p class="location-hours">Lunes a Domingo: 6:00 AM - 10:00 AM</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Más ubicaciones se pueden agregar aquí -->
+                        <div class="location-item" data-lat="19.616049986705374" data-lng="-99.08766238015005" role="button" tabindex="0" aria-label="Ubicación de tortas en Coacalco">
+                            <div class="location-marker" aria-hidden="true">📍</div>
+                            <div class="location-info">
+                                <h5 class="location-name">TORTAS</h5>
+                                <p class="location-address">Calle, Sierra Fría #1, Parque Residencial Coacalco, 55719 San Francisco Coacalco, Méx.</p>
+                                <p class="location-hours">Lunes a Domingo: 6:30 AM - 1:20 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="location-item" data-lat="19.571029362677734" data-lng="-99.01930817324913" role="button" tabindex="0" aria-label="Ubicación de dulces en Ecatepec">
+                            <div class="location-marker" aria-hidden="true">📍</div>
+                            <div class="location-info">
+                                <h5 class="location-name">DULCES</h5>
+                                <p class="location-address">Cedro Manzana 027, Sin Nombre, 55118 Ecatepec de Morelos, Méx.</p>
+                                <p class="location-hours">Martes a Domingo: 7:00 AM - 3:00 PM</p>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; 2024 El Gatito Panzón. Todos los derechos reservados.</p>
+            <p>Comida tradicional mexicana en Ecatepec y Coacalco</p>
+        </div>
+    </footer>
+    
+    <!-- Firebase SDKs para detectar autenticación -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+    <script>
+      // Configuración de Firebase (misma que en login.html)
+      const firebaseConfig = {
+        apiKey: "AIzaSyCGO_EAAEfOFCCzkg4C-1Lo9as9feFOrDo",
+        authDomain: "elgatitopanzoon.firebaseapp.com",
+        projectId: "elgatitopanzoon",
+        storageBucket: "elgatitopanzoon.firebasestorage.app",
+        messagingSenderId: "248328568972",
+        appId: "1:248328568972:web:56ca92b059f2d05e087ba9",
+        measurementId: "G-XMHRPNKKBS"
+      };
+
+      // Inicializar Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <!-- JavaScript -->
+    <script src="js/funciones.js?v=2.0"></script>
+    <script src="js/navbar-auth.js"></script>
+    <script src="js/carrito.js"></script>
+    
+    <!-- Script de respaldo para navegación de menús -->
+    <script>
+        // Respaldo para navegación de menús
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Script de respaldo cargado');
+            
+            // Agregar event listeners directamente
+            const menuButtons = document.querySelectorAll('.menu-btn');
+            console.log('Botones encontrados:', menuButtons.length);
+            
+            menuButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    console.log('Clic en botón:', category);
+                    
+                    switch(category) {
+                        case 'tamales':
+                            window.location.href = 'tamales.html';
+                            break;
+                        case 'tortas':
+                            window.location.href = 'tortas.html';
+                            break;
+                        case 'dulces':
+                            window.location.href = 'dulces.html';
+                            break;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
