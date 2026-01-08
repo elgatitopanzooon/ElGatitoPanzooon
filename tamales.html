@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/styles.css?v=8.0">
     
 </head>
-<body>
+<body class="menu-page"></body>
     <!-- Estructura base de la página -->
     <header class="navbar" role="banner">
         <!-- Barra de navegación superior -->
@@ -55,8 +55,8 @@
         <!-- Sección de productos -->
         <section class="products-section" aria-labelledby="products-title">
             <div class="products-container">
+                <h3 class="products-title" id="products-title">Nuestros Tamales</h3>
                 <div class="menu-products-container">
-                    <h3 class="products-title" id="products-title">Nuestros Tamales</h3>
                     
                     <!-- Producto 1 -->
                     <article class="menu-item-card" role="article" aria-labelledby="product-1-title">
@@ -132,7 +132,112 @@
                             </button>
                         </div>
                     </article>
+                    
+                    <!-- Producto 6 -->
+                    <article class="menu-item-card" role="article" aria-labelledby="product-6-title">
+                        <div class="menu-item-image-container">
+                            <img src="images/tamal.png" alt="Tamal de Rajas con Queso" class="menu-item-image">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4 class="menu-item-name" id="product-6-title">Tamal de Rajas con Queso</h4>
+                            <p class="menu-item-description">Tamal relleno de rajas de chile poblano con queso Oaxaca derretido</p>
+                            <div class="menu-item-price">$26.00</div>
+                            <button class="add-to-cart-btn" data-product="tamal-rajas" aria-label="Agregar Tamal de Rajas con Queso al carrito">
+                                🛒 Agregar al Carrito
+                            </button>
+                        </div>
+                    </article>
+                    
+                    <!-- Producto 7 -->
+                    <article class="menu-item-card" role="article" aria-labelledby="product-7-title">
+                        <div class="menu-item-image-container">
+                            <img src="images/tamal.png" alt="Tamal de Frijol" class="menu-item-image">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4 class="menu-item-name" id="product-7-title">Tamal de Frijol</h4>
+                            <p class="menu-item-description">Tamal tradicional relleno de frijoles refritos con especias mexicanas</p>
+                            <div class="menu-item-price">$24.00</div>
+                            <button class="add-to-cart-btn" data-product="tamal-frijol" aria-label="Agregar Tamal de Frijol al carrito">
+                                🛒 Agregar al Carrito
+                            </button>
+                        </div>
+                    </article>
+                    
+                    <!-- Producto 8 -->
+                    <article class="menu-item-card" role="article" aria-labelledby="product-8-title">
+                        <div class="menu-item-image-container">
+                            <img src="images/tamal.png" alt="Tamal Verde" class="menu-item-image">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4 class="menu-item-name" id="product-8-title">Tamal Verde</h4>
+                            <p class="menu-item-description">Tamal en salsa verde de tomatillo con carne de cerdo deshebrada</p>
+                            <div class="menu-item-price">$30.00</div>
+                            <button class="add-to-cart-btn" data-product="tamal-verde" aria-label="Agregar Tamal Verde al carrito">
+                                🛒 Agregar al Carrito
+                            </button>
+                        </div>
+                    </article>
+                    
+                    <!-- Producto 9 -->
+                    <article class="menu-item-card" role="article" aria-labelledby="product-9-title">
+                        <div class="menu-item-image-container">
+                            <img src="images/tamal.png" alt="Tamal de Mole" class="menu-item-image">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4 class="menu-item-name" id="product-9-title">Tamal de Mole</h4>
+                            <p class="menu-item-description">Tamal bañado en mole poblano con pollo y ajonjolí</p>
+                            <div class="menu-item-price">$32.00</div>
+                            <button class="add-to-cart-btn" data-product="tamal-mole" aria-label="Agregar Tamal de Mole al carrito">
+                                🛒 Agregar al Carrito
+                            </button>
+                        </div>
+                    </article>
+                    
+                    <!-- Producto 10 -->
+                    <article class="menu-item-card" role="article" aria-labelledby="product-10-title">
+                        <div class="menu-item-image-container">
+                            <img src="images/tamal.png" alt="Tamal de Elote" class="menu-item-image">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4 class="menu-item-name" id="product-10-title">Tamal de Elote</h4>
+                            <p class="menu-item-description">Tamal dulce de elote tierno con granos de maíz y canela</p>
+                            <div class="menu-item-price">$23.00</div>
+                            <button class="add-to-cart-btn" data-product="tamal-elote" aria-label="Agregar Tamal de Elote al carrito">
+                                🛒 Agregar al Carrito
+                            </button>
+                        </div>
+                    </article>
                 </div>
+            </div>
+        </section>
+        
+        <!-- Sección de comentarios -->
+        <section id="comentarios" class="comments-section">
+            <div class="comments-container">
+                <h2 class="comments-title">⭐ Opiniones de clientes</h2>
+                
+                <div class="rating-container">
+                    <div id="rating" class="rating-stars">
+                        <span data-value="1">⭐</span>
+                        <span data-value="2">⭐</span>
+                        <span data-value="3">⭐</span>
+                        <span data-value="4">⭐</span>
+                        <span data-value="5">⭐</span>
+                    </div>
+                    <p class="rating-average">⭐ Promedio: <span id="promedio">0</span></p>
+                </div>
+                
+                <div class="comment-form" id="comment-form">
+                    <input id="nombre" class="comment-input" placeholder="Tu nombre" type="text">
+                    <textarea id="comentario" class="comment-textarea" placeholder="Escribe tu comentario sobre nuestros tamales"></textarea>
+                    <button id="btnEnviarComentario" class="comment-submit-btn">Enviar comentario</button>
+                </div>
+                
+                <div class="login-required" id="login-required" style="display: none;">
+                    <p>Debes <a href="login.html">iniciar sesión</a> para dejar un comentario</p>
+                </div>
+                
+                <div id="listaComentarios" class="comments-list"></div>
             </div>
         </section>
     </main>
@@ -144,7 +249,7 @@
         </div>
     </footer>
     
-    <!-- Firebase SDKs para detectar autenticación -->
+    <!-- Firebase SDKs para detectar autenticación (compatibilidad con navbar-auth.js) -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
@@ -159,7 +264,7 @@
     </script>
 
     <script>
-      // Configuración de Firebase (misma que en login.html)
+      // Configuración de Firebase (compatibilidad con sistema existente)
       const firebaseConfig = {
         apiKey: "AIzaSyCGO_EAAEfOFCCzkg4C-1Lo9as9feFOrDo",
         authDomain: "elgatitopanzoon.firebaseapp.com",
@@ -170,7 +275,7 @@
         measurementId: "G-XMHRPNKKBS"
       };
 
-      // Inicializar Firebase
+      // Inicializar Firebase (compatibilidad)
       firebase.initializeApp(firebaseConfig);
     </script>
 
@@ -229,6 +334,17 @@
             
             // Iniciar configuración
             waitForCartScript();
+        });
+    </script>
+    
+    <!-- Sistema de comentarios con Firestore -->
+    <script type="module">
+        // Importar el sistema de comentarios
+        import { CommentsSystem } from './js/comments-system.js';
+        
+        // Inicializar sistema de comentarios para tamales
+        document.addEventListener('DOMContentLoaded', () => {
+            new CommentsSystem('tamales');
         });
     </script>
 </body>
