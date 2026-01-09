@@ -122,9 +122,25 @@
                     <div class="video-section">
                         <h3 class="video-title">Conoce Nuestros Productos</h3>
                         <div class="video-container">
-                            <!-- Video promocional se agregará aquí -->
-                            <!-- El video real se agregará aquí cuando esté disponible -->
-                            <!-- <iframe src="VIDEO_URL" frameborder="0" allowfullscreen></iframe> -->
+                            <!-- Video promocional -->
+                            <video 
+                                class="promotional-video" 
+                                autoplay 
+                                muted 
+                                loop 
+                                playsinline
+                                preload="metadata"
+                                aria-label="Video promocional de nuestros productos">
+                                <source src="videos/videopromocional.mp4" type="video/mp4">
+                                <!-- Fallback para navegadores que no soportan video -->
+                                <div class="video-fallback">
+                                    <div class="video-placeholder">
+                                        <div class="video-icon">🎬</div>
+                                        <p class="video-text">Video Promocional</p>
+                                        <p class="video-subtext">Conoce nuestros deliciosos productos</p>
+                                    </div>
+                                </div>
+                            </video>
                         </div>
                     </div>
                     
@@ -255,6 +271,49 @@
     <script src="js/funciones.js?v=2.0"></script>
     <script src="js/navbar-auth.js"></script>
     <script src="js/carrito.js"></script>
+    
+    <!-- Script para manejo del video promocional -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.promotional-video');
+            
+            if (video) {
+                // Asegurar que el video se reproduzca automáticamente
+                video.addEventListener('loadedmetadata', function() {
+                    console.log('📹 Video promocional cargado correctamente');
+                    
+                    // Intentar reproducir el video
+                    const playPromise = video.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            console.log('✅ Video reproduciéndose automáticamente');
+                        }).catch(error => {
+                            console.log('⚠️ Autoplay bloqueado por el navegador:', error);
+                            // El video seguirá disponible para reproducción manual
+                        });
+                    }
+                });
+                
+                // Manejar errores de carga del video
+                video.addEventListener('error', function(e) {
+                    console.error('❌ Error al cargar el video:', e);
+                    // Mostrar fallback si el video no se puede cargar
+                    const fallback = video.nextElementSibling;
+                    if (fallback && fallback.classList.contains('video-fallback')) {
+                        fallback.style.display = 'flex';
+                        video.style.display = 'none';
+                    }
+                });
+                
+                // Asegurar que el video esté silenciado
+                video.muted = true;
+                video.volume = 0;
+                
+                console.log('🎬 Sistema de video promocional inicializado');
+            }
+        });
+    </script>
     
     <!-- Script de respaldo para navegación de menús -->
     <script>
