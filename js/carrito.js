@@ -17,6 +17,11 @@ const PRODUCTS_DATABASE = {
     'tamal-queso': { name: 'Tamal de Queso', price: 22.00, image: 'images/tamal.png' },
     'tamal-dulce': { name: 'Tamal Dulce', price: 20.00, image: 'images/tamal.png' },
     'tamal-oaxaqueno': { name: 'Tamal Oaxaqueño', price: 35.00, image: 'images/tamal.png' },
+    'tamal-rajas': { name: 'Tamal de Rajas con Queso', price: 26.00, image: 'images/tamal.png' },
+    'tamal-frijol': { name: 'Tamal de Frijol', price: 24.00, image: 'images/tamal.png' },
+    'tamal-verde': { name: 'Tamal Verde', price: 30.00, image: 'images/tamal.png' },
+    'tamal-mole': { name: 'Tamal de Mole', price: 32.00, image: 'images/tamal.png' },
+    'tamal-elote': { name: 'Tamal de Elote', price: 23.00, image: 'images/tamal.png' },
     
     // Tortas
     'torta-jamon': { name: 'Torta de Jamón', price: 45.00, image: 'images/torta.png' },
@@ -24,13 +29,26 @@ const PRODUCTS_DATABASE = {
     'torta-ahogada': { name: 'Torta Ahogada', price: 50.00, image: 'images/torta.png' },
     'torta-pollo': { name: 'Torta de Pollo', price: 48.00, image: 'images/torta.png' },
     'torta-cubana': { name: 'Torta Cubana', price: 65.00, image: 'images/torta.png' },
+    'torta-carnitas': { name: 'Torta de Carnitas', price: 52.00, image: 'images/torta.png' },
+    'torta-chorizo': { name: 'Torta de Chorizo', price: 47.00, image: 'images/torta.png' },
+    'torta-pastor': { name: 'Torta de Pastor', price: 49.00, image: 'images/torta.png' },
+    'torta-quesadilla': { name: 'Torta Quesadilla', price: 44.00, image: 'images/torta.png' },
+    'torta-lomo': { name: 'Torta de Lomo', price: 58.00, image: 'images/torta.png' },
     
     // Dulces
     'cocadas': { name: 'Cocadas', price: 15.00, image: 'images/dulce.png' },
     'alegrias': { name: 'Alegrías', price: 18.00, image: 'images/dulce.png' },
     'palanquetas': { name: 'Palanquetas', price: 12.00, image: 'images/dulce.png' },
     'jamoncillos': { name: 'Jamoncillos', price: 20.00, image: 'images/dulce.png' },
-    'mueganos': { name: 'Muéganos', price: 16.00, image: 'images/dulce.png' }
+    'mueganos': { name: 'Muéganos', price: 16.00, image: 'images/dulce.png' },
+    'obleas': { name: 'Obleas con Cajeta', price: 14.00, image: 'images/dulce.png' },
+    'mazapan': { name: 'Mazapán', price: 10.00, image: 'images/dulce.png' },
+    'pepitorias': { name: 'Pepitorias', price: 17.00, image: 'images/dulce.png' },
+    'borrachitos': { name: 'Borrachitos', price: 19.00, image: 'images/dulce.png' },
+    'gaznates': { name: 'Gaznates', price: 21.00, image: 'images/dulce.png' },
+    
+    // Combos especiales
+    'combo-familiar': { name: 'Combo Familiar (6 tamales + 2 tortas + dulces)', price: 150.00, originalPrice: 180.00, image: 'images/logo.png', isCombo: true }
 };
 
 // Inicialización
@@ -173,8 +191,10 @@ function createCartItemHTML(item) {
         <div class="cart-item" data-product-id="${item.id}">
             <img src="${item.image}" alt="${item.name}">
             <div class="cart-item-info">
-                <h4 class="cart-item-name">${item.name}</h4>
-                <p class="cart-item-price">$${item.price.toFixed(2)} c/u</p>
+                <h4 class="cart-item-name">${item.name}${item.isCombo ? ' <span style="color: #27ae60; font-size: 0.8rem;">¡DESCUENTO!</span>' : ''}</h4>
+                <p class="cart-item-price">${item.isCombo && item.originalPrice ? 
+                    `<span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$${item.originalPrice.toFixed(2)}</span> <span style="color: #27ae60; font-weight: bold;">$${item.price.toFixed(2)} c/u</span>` :
+                    `$${item.price.toFixed(2)} c/u`}</p>
             </div>
             <div class="cart-item-controls">
                 <div class="quantity-controls">
@@ -339,9 +359,11 @@ function showCheckoutModal() {
         backdrop-filter: blur(10px);
         z-index: 10000;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         animation: fadeIn 0.3s ease;
+        overflow-y: auto;
+        padding: 2rem 0;
     `;
     
     const modalContent = document.createElement('div');
@@ -352,9 +374,12 @@ function showCheckoutModal() {
         padding: 2.5rem;
         max-width: 500px;
         width: 90%;
+        max-height: 90vh;
         text-align: center;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         animation: slideIn 0.3s ease;
+        overflow-y: auto;
+        margin: auto;
     `;
     
     modalContent.innerHTML = `
@@ -413,10 +438,24 @@ function showCheckoutModal() {
                           placeholder="Calle, número, colonia, referencias"></textarea>
             </div>
             
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 10px; margin: 1.5rem 0;">
+            <div style="margin: 1rem 0; text-align: left;">
+                <label style="color: var(--color-white); font-weight: 600; display: block; margin-bottom: 0.5rem;">
+                    Método de Pago:
+                </label>
+                <select id="modal-payment-method" required 
+                        style="width: 100%; padding: 0.8rem; border: none; border-radius: 10px; 
+                               background: rgba(255, 255, 255, 0.9); color: #152453; font-weight: 600;
+                               box-sizing: border-box; cursor: pointer;">
+                    <option value="">Selecciona método de pago</option>
+                    <option value="efectivo">💵 Efectivo (al recibir)</option>
+                    <option value="tarjeta">💳 Tarjeta Crédito/Débito (con terminal al recibir)</option>
+                </select>
+            </div>
+            
+            <div id="payment-info" style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 10px; margin: 1rem 0; display: none;">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: var(--color-white);">
-                    <span style="font-size: 1.5rem;">💵</span>
-                    <span style="font-weight: 600;">Pago en Efectivo (al recibir)</span>
+                    <span id="payment-icon" style="font-size: 1.5rem;">💵</span>
+                    <span id="payment-text" style="font-weight: 600;">Pago seleccionado</span>
                 </div>
             </div>
             
@@ -478,20 +517,42 @@ function showCheckoutModal() {
         style.remove();
     });
     
+    // Manejar cambio de método de pago
+    document.getElementById('modal-payment-method').addEventListener('change', (e) => {
+        const paymentInfo = document.getElementById('payment-info');
+        const paymentIcon = document.getElementById('payment-icon');
+        const paymentText = document.getElementById('payment-text');
+        
+        if (e.target.value) {
+            paymentInfo.style.display = 'block';
+            
+            if (e.target.value === 'efectivo') {
+                paymentIcon.textContent = '💵';
+                paymentText.textContent = 'Pago en Efectivo (al recibir)';
+            } else if (e.target.value === 'tarjeta') {
+                paymentIcon.textContent = '💳';
+                paymentText.textContent = 'Tarjeta Crédito/Débito (con terminal al recibir)';
+            }
+        } else {
+            paymentInfo.style.display = 'none';
+        }
+    });
+    
     document.getElementById('simple-checkout-form').addEventListener('submit', (e) => {
         e.preventDefault();
         
         const name = document.getElementById('modal-customer-name').value.trim();
         const phone = document.getElementById('modal-customer-phone').value.trim();
         const address = document.getElementById('modal-customer-address').value.trim();
+        const paymentMethod = document.getElementById('modal-payment-method').value;
         
-        if (!name || !phone || !address) {
+        if (!name || !phone || !address || !paymentMethod) {
             alert('Por favor completa todos los campos');
             return;
         }
         
         // Procesar pedido
-        processOrder(name, phone, address);
+        processOrder(name, phone, address, paymentMethod);
         modal.remove();
         style.remove();
     });
@@ -506,7 +567,7 @@ function showCheckoutModal() {
 }
 
 // Procesar pedido
-function processOrder(customerName, customerPhone, customerAddress) {
+function processOrder(customerName, customerPhone, customerAddress, paymentMethod) {
     const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     
     // Crear datos del pedido
@@ -520,6 +581,7 @@ function processOrder(customerName, customerPhone, customerAddress) {
         },
         items: [...cartItems],
         total: total,
+        paymentMethod: paymentMethod,
         timestamp: new Date().toISOString(),
         status: 'confirmado'
     };
@@ -612,7 +674,7 @@ function showOrderConfirmation(orderData) {
                 <strong style="color: var(--color-gold);">Total:</strong> $${orderData.total.toFixed(2)}
             </p>
             <p style="margin: 0.5rem 0; color: var(--color-white);">
-                <strong style="color: var(--color-gold);">Método de Pago:</strong> Efectivo
+                <strong style="color: var(--color-gold);">Método de Pago:</strong> ${orderData.paymentMethod === 'efectivo' ? '💵 Efectivo (al recibir)' : '💳 Tarjeta Crédito/Débito (con terminal al recibir)'}
             </p>
         </div>
         
@@ -1008,6 +1070,7 @@ function enviarPedidoEmail(orderData) {
         direccion: orderData.customer.address,
         total: `$${orderData.total.toFixed(2)}`,
         pedido_id: orderData.orderId,
+        metodo: orderData.paymentMethod === 'efectivo' ? 'Efectivo (al recibir)' : 'Tarjeta Crédito/Débito (con terminal al recibir)',
         pedido: orderData.items.map(item => 
             `${item.quantity} x ${item.name} - $${(item.price * item.quantity).toFixed(2)}`
         ).join('\n'),
