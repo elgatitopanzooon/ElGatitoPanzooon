@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - El Gatito Panzón</title>
+    <link rel="stylesheet" href="css/styles.css?v=8.0">
+    <style>
+        .admin-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #152453 0%, #364277 50%, #4e598c 100%);
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .admin-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid var(--color-gold);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .admin-title {
+            color: var(--color-gold);
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .admin-button {
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0.5rem;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .admin-button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .admin-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .btn-open {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+        
+        .btn-close {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        .btn-logout {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+            color: white;
+            box-shadow: 0 6px 20px rgba(149, 165, 166, 0.4);
+            margin-top: 2rem;
+        }
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .categories-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .category-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .category-control:hover {
+            border-color: var(--color-gold);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .category-header h4 {
+            color: var(--color-white);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .category-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 2px solid;
+        }
+        
+        .category-status.available {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.2) 0%, rgba(46, 204, 113, 0.2) 100%);
+            border-color: #27ae60;
+            color: #27ae60;
+        }
+        
+        .category-status.unavailable {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.2) 0%, rgba(192, 57, 43, 0.2) 100%);
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+        
+        .category-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .btn-open-small, .btn-close-small {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            min-width: 120px;
+        }
+        
+        .btn-open-small {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+        }
+        
+        .btn-close-small {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+        }
+        
+        .status-container {
+            margin: 2rem 0;
+        }
+        
+        @media (min-width: 768px) {
+            .button-container {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .categories-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .admin-container {
+                padding: 1rem;
+            }
+            
+            .admin-panel {
+                padding: 2rem;
+            }
+            
+            .admin-title {
+                font-size: 2rem;
+            }
+            
+            .admin-button {
+                min-width: 100%;
+                margin: 0.5rem 0;
+            }
+            
+            .category-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-open-small, .btn-close-small {
+                min-width: 100%;
+            }
+            
+            .category-header {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-panel">
+            <!-- Título del panel -->
+            <h1 class="admin-title">🏪 Panel de Administración</h1>
+            
+            <!-- Información del administrador -->
+            <div id="admin-info"></div>
+            
+            <!-- Estado actual por categorías -->
+            <div class="status-container">
+                <h3 style="color: var(--color-white); text-align: center; margin-bottom: 1.5rem;">Estado por Categorías</h3>
+                <div id="categories-status"></div>
+            </div>
+            
+            <!-- Controles por categoría -->
+            <div class="categories-container">
+                <!-- Control de Tamales -->
+                <div class="category-control">
+                    <div class="category-header">
+                        <h4>🫔 Tamales</h4>
+                        <div class="category-status" id="tamales-status">🟢 Disponible</div>
+                    </div>
+                    <div class="category-buttons">
+                        <button id="btnAbrirTamales" class="admin-button btn-open-small" data-category="tamales">
+                            🟢 Abrir
+                        </button>
+                        <button id="btnCerrarTamales" class="admin-button btn-close-small" data-category="tamales">
+                            🔴 Cerrar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Control de Tortas -->
+                <div class="category-control">
+                    <div class="category-header">
+                        <h4>🥪 Tortas</h4>
+                        <div class="category-status" id="tortas-status">🟢 Disponible</div>
+                    </div>
+                    <div class="category-buttons">
+                        <button id="btnAbrirTortas" class="admin-button btn-open-small" data-category="tortas">
+                            🟢 Abrir
+                        </button>
+                        <button id="btnCerrarTortas" class="admin-button btn-close-small" data-category="tortas">
+                            🔴 Cerrar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Control de Dulces -->
+                <div class="category-control">
+                    <div class="category-header">
+                        <h4>🍬 Dulces</h4>
+                        <div class="category-status" id="dulces-status">🟢 Disponible</div>
+                    </div>
+                    <div class="category-buttons">
+                        <button id="btnAbrirDulces" class="admin-button btn-open-small" data-category="dulces">
+                            🟢 Abrir
+                        </button>
+                        <button id="btnCerrarDulces" class="admin-button btn-close-small" data-category="dulces">
+                            🔴 Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Botón de cerrar sesión -->
+            <div style="text-align: center;">
+                <button id="btnLogout" class="admin-button btn-logout">
+                    🚪 Cerrar Sesión
+                </button>
+            </div>
+            
+            <!-- Información adicional -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <h3 style="color: var(--color-white); margin-bottom: 1rem; font-size: 1.1rem;">ℹ️ Control por Categorías</h3>
+                <ul style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; line-height: 1.6; margin: 0; padding-left: 1.5rem;">
+                    <li>Puedes <strong style="color: #27ae60;">abrir</strong> o <strong style="color: #e74c3c;">cerrar</strong> cada categoría de productos por separado</li>
+                    <li>Los clientes solo podrán pedir productos de las categorías que estén <strong style="color: #27ae60;">abiertas</strong></li>
+                    <li>Los cambios se reflejan inmediatamente en todas las páginas del sitio</li>
+                    <li>En la página principal se muestra un resumen del estado de todas las categorías</li>
+                    <li>En las páginas específicas (tamales.html, tortas.html, dulces.html) se muestra el estado de esa categoría</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>
+
+    <script>
+        // Configuración de Firebase (para compatibilidad)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCGO_EAAEfOFCCzkg4C-1Lo9as9feFOrDo",
+            authDomain: "elgatitopanzoon.firebaseapp.com",
+            projectId: "elgatitopanzoon",
+            storageBucket: "elgatitopanzoon.firebasestorage.app",
+            messagingSenderId: "248328568972",
+            appId: "1:248328568972:web:56ca92b059f2d05e087ba9",
+            measurementId: "G-XMHRPNKKBS"
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <!-- Script del panel de administración -->
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>

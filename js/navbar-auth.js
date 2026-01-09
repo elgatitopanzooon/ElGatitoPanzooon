@@ -38,11 +38,26 @@ function updateNavbarForUser(user) {
     const loginLink = document.getElementById('login-link');
     const userMenu = document.getElementById('user-menu');
     const userGreeting = document.getElementById('user-greeting');
+    const adminLink = document.getElementById('admin-link');
+    
+    // Email del administrador autorizado
+    const ADMIN_EMAIL = "elgatitopanzooon@gmail.com";
     
     if (user) {
         // Usuario autenticado - mostrar menú de usuario
         if (loginLink) loginLink.style.display = 'none';
         if (userMenu) userMenu.style.display = 'block';
+        
+        // Verificar si es administrador y mostrar/ocultar enlace admin
+        if (adminLink) {
+            if (user.email === ADMIN_EMAIL) {
+                adminLink.style.display = 'block';
+                console.log('✅ Enlace de administración mostrado para:', user.email);
+            } else {
+                adminLink.style.display = 'none';
+                console.log('❌ Enlace de administración oculto para:', user.email);
+            }
+        }
         
         // Actualizar saludo con el nombre del usuario
         const displayName = user.displayName || user.email.split('@')[0];
@@ -52,9 +67,10 @@ function updateNavbarForUser(user) {
         
         console.log('Usuario autenticado en navbar:', displayName);
     } else {
-        // Usuario no autenticado - mostrar enlace de login
+        // Usuario no autenticado - mostrar enlace de login y ocultar admin
         if (loginLink) loginLink.style.display = 'block';
         if (userMenu) userMenu.style.display = 'none';
+        if (adminLink) adminLink.style.display = 'none';
         
         console.log('Usuario no autenticado en navbar');
     }

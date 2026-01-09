@@ -51,6 +51,7 @@
                         <button class="dropdown-item logout-btn" id="navbar-logout">Cerrar Sesión</button>
                     </div>
                 </div>
+                <a href="admin.html" class="navbar-link admin-link" id="admin-link" role="button" aria-label="Panel de Administración" style="display: none;">⚙️ Admin</a>
                 <a href="carrito.html" class="navbar-link" id="cart-link" role="button" aria-label="Ver carrito de compras">🛒 Carrito</a>
             </div>
         </nav>
@@ -67,6 +68,9 @@
                 <div class="title-container">
                     <h2 class="hero-title" id="hero-title">El Gatito Panzón</h2>
                     <p class="hero-subtitle">Deliciosos Tamales, Tortas y Dulces Tradicionales</p>
+                    
+                    <!-- Estado del negocio -->
+                    <div id="estadoNegocio" style="margin-top: 1.5rem;"></div>
                 </div>
             </div>
         </section>
@@ -122,9 +126,25 @@
                     <div class="video-section">
                         <h3 class="video-title">Conoce Nuestros Productos</h3>
                         <div class="video-container">
-                            <!-- Video promocional se agregará aquí -->
-                            <!-- El video real se agregará aquí cuando esté disponible -->
-                            <!-- <iframe src="VIDEO_URL" frameborder="0" allowfullscreen></iframe> -->
+                            <!-- Video promocional -->
+                            <video 
+                                class="promotional-video" 
+                                autoplay 
+                                muted 
+                                loop 
+                                playsinline
+                                preload="metadata"
+                                aria-label="Video promocional de nuestros productos">
+                                <source src="videos/videopromocional.mp4" type="video/mp4">
+                                <!-- Fallback para navegadores que no soportan video -->
+                                <div class="video-fallback">
+                                    <div class="video-placeholder">
+                                        <div class="video-icon">🎬</div>
+                                        <p class="video-text">Video Promocional</p>
+                                        <p class="video-subtext">Conoce nuestros deliciosos productos</p>
+                                    </div>
+                                </div>
+                            </video>
                         </div>
                     </div>
                     
@@ -133,7 +153,7 @@
                         <h3 class="promotional-title">Ofertas Especiales</h3>
                         
                         <!-- Ficha promocional 1 -->
-                        <div class="promo-card">
+                        <div class="promo-card clickable" data-promo="combo-familiar">
                             <div class="promo-badge">📢 ¡OFERTA! 📢</div>
                             <div class="promo-content">
                                 <h4 class="promo-name">Combo Familiar</h4>
@@ -142,11 +162,14 @@
                                     <span class="price-old">$180</span>
                                     <span class="price-new">$150</span>
                                 </div>
+                                <button class="promo-btn" onclick="handlePromoClick('combo-familiar')">
+                                    🛒 Agregar Combo
+                                </button>
                             </div>
                         </div>
                         
                         <!-- Ficha promocional 2 -->
-                        <div class="promo-card">
+                        <div class="promo-card clickable" data-promo="tamales-casa">
                             <div class="promo-badge bestseller">🔥 MÁS VENDIDO 🔥</div>
                             <div class="promo-content">
                                 <h4 class="promo-name">Tamales de la Casa</h4>
@@ -154,11 +177,14 @@
                                 <div class="promo-price">
                                     <span class="price-new">$25 c/u</span>
                                 </div>
+                                <button class="promo-btn" onclick="handlePromoClick('tamales-casa')">
+                                    📜 Ver Tamales
+                                </button>
                             </div>
                         </div>
                         
                         <!-- Ficha promocional 3 -->
-                        <div class="promo-card">
+                        <div class="promo-card clickable" data-promo="dulces-artesanales">
                             <div class="promo-badge special">✨ ESPECIAL ✨</div>
                             <div class="promo-content">
                                 <h4 class="promo-name">Dulces Artesanales</h4>
@@ -166,6 +192,9 @@
                                 <div class="promo-price">
                                     <span class="price-new">Desde $15</span>
                                 </div>
+                                <button class="promo-btn" onclick="handlePromoClick('dulces-artesanales')">
+                                    🍬 Ver Dulces
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -256,6 +285,52 @@
     <script src="js/navbar-auth.js"></script>
     <script src="js/carrito.js"></script>
     
+    <!-- Sistema de estado del negocio -->
+    <script type="module" src="js/business-status.js"></script>
+    
+    <!-- Script para manejo del video promocional -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.promotional-video');
+            
+            if (video) {
+                // Asegurar que el video se reproduzca automáticamente
+                video.addEventListener('loadedmetadata', function() {
+                    console.log('📹 Video promocional cargado correctamente');
+                    
+                    // Intentar reproducir el video
+                    const playPromise = video.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            console.log('✅ Video reproduciéndose automáticamente');
+                        }).catch(error => {
+                            console.log('⚠️ Autoplay bloqueado por el navegador:', error);
+                            // El video seguirá disponible para reproducción manual
+                        });
+                    }
+                });
+                
+                // Manejar errores de carga del video
+                video.addEventListener('error', function(e) {
+                    console.error('❌ Error al cargar el video:', e);
+                    // Mostrar fallback si el video no se puede cargar
+                    const fallback = video.nextElementSibling;
+                    if (fallback && fallback.classList.contains('video-fallback')) {
+                        fallback.style.display = 'flex';
+                        video.style.display = 'none';
+                    }
+                });
+                
+                // Asegurar que el video esté silenciado
+                video.muted = true;
+                video.volume = 0;
+                
+                console.log('🎬 Sistema de video promocional inicializado');
+            }
+        });
+    </script>
+    
     <!-- Script de respaldo para navegación de menús -->
     <script>
         // Respaldo para navegación de menús
@@ -285,6 +360,264 @@
                 });
             });
         });
+    </script>
+    
+    <!-- Script para manejar promociones especiales -->
+    <script>
+        // Función para manejar clics en promociones
+        function handlePromoClick(promoType) {
+            console.log(`🎯 Promoción seleccionada: ${promoType}`);
+            
+            switch(promoType) {
+                case 'combo-familiar':
+                    handleComboFamiliar();
+                    break;
+                case 'tamales-casa':
+                    window.location.href = 'tamales.html';
+                    break;
+                case 'dulces-artesanales':
+                    window.location.href = 'dulces.html';
+                    break;
+                default:
+                    console.log('Promoción no reconocida');
+            }
+        }
+        
+        // Función para manejar el combo familiar
+        function handleComboFamiliar() {
+            // Verificar autenticación
+            if (typeof firebase === 'undefined' || !firebase.auth) {
+                alert('Sistema no disponible. Recarga la página.');
+                return;
+            }
+            
+            const user = firebase.auth().currentUser;
+            if (!user) {
+                alert('Debes iniciar sesión para agregar el combo al carrito');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Mostrar modal de confirmación del combo
+            showComboModal();
+        }
+        
+        // Mostrar modal del combo familiar
+        function showComboModal() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: linear-gradient(135deg, #152453 0%, #364277 50%, #4e598c 100%);
+                border: 3px solid var(--color-gold);
+                border-radius: 20px;
+                padding: 2.5rem;
+                max-width: 500px;
+                width: 90%;
+                text-align: center;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+                animation: slideIn 0.3s ease;
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🍽️</div>
+                <h3 style="color: var(--color-white); font-size: 1.8rem; font-weight: 800; margin: 0 0 1.5rem 0;">
+                    Combo Familiar
+                </h3>
+                
+                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 1.5rem; margin: 1.5rem 0; text-align: left;">
+                    <h4 style="color: var(--color-gold); margin: 0 0 1rem 0; font-size: 1.2rem;">Incluye:</h4>
+                    <div style="color: var(--color-white); font-size: 0.95rem; line-height: 1.8;">
+                        <div style="margin: 0.5rem 0;">🫔 6 Tamales variados (Pollo, Cerdo, Queso)</div>
+                        <div style="margin: 0.5rem 0;">🥪 2 Tortas (Jamón y Milanesa)</div>
+                        <div style="margin: 0.5rem 0;">🍬 Dulces tradicionales (Cocadas y Alegrías)</div>
+                    </div>
+                    <div style="border-top: 2px solid var(--color-gold); padding-top: 1rem; margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span style="color: rgba(255, 255, 255, 0.7); font-size: 1rem; text-decoration: line-through;">Precio normal: $180</span><br>
+                            <span style="color: #d4a373; font-size: 1.8rem; font-weight: 900;">Precio combo: $150</span>
+                        </div>
+                        <div style="color: var(--color-gold); font-size: 1.2rem; font-weight: 700;">¡Ahorra $30!</div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                    <button onclick="this.parentElement.parentElement.parentElement.remove()" style="
+                        padding: 0.8rem 1.5rem;
+                        border: none;
+                        border-radius: 12px;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        background: rgba(255, 255, 255, 0.15);
+                        color: var(--color-white);
+                        border: 2px solid rgba(255, 255, 255, 0.4);
+                        min-width: 120px;
+                    ">
+                        Cancelar
+                    </button>
+                    <button onclick="addComboToCart(); this.parentElement.parentElement.parentElement.remove();" style="
+                        padding: 0.8rem 1.5rem;
+                        border: none;
+                        border-radius: 12px;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        background: linear-gradient(135deg, #d4a373 0%, var(--color-orange-dark) 100%);
+                        color: var(--color-white);
+                        box-shadow: 0 4px 15px rgba(212, 163, 115, 0.4);
+                        min-width: 120px;
+                    ">
+                        🛒 Agregar al Carrito
+                    </button>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Agregar estilos de animación
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideIn {
+                    from { transform: translateY(-50px) scale(0.9); opacity: 0; }
+                    to { transform: translateY(0) scale(1); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Cerrar al hacer clic fuera del modal
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                    style.remove();
+                }
+            });
+        }
+        
+        // Función para agregar combo al carrito
+        function addComboToCart() {
+            console.log('🛒 Agregando combo familiar al carrito...');
+            
+            // Verificar que la función addToCart esté disponible
+            if (typeof window.addToCart !== 'function') {
+                console.error('❌ Función addToCart no disponible');
+                alert('Error: Sistema de carrito no disponible');
+                return;
+            }
+            
+            // Agregar el combo como un producto especial con descuento aplicado
+            try {
+                // Verificar autenticación
+                const user = firebase.auth().currentUser;
+                if (!user) {
+                    alert('Debes iniciar sesión para agregar el combo');
+                    return;
+                }
+                
+                // Cargar carrito actual
+                const userId = user.uid;
+                const cartKey = `gatito_cart_${userId}`;
+                let cartData = JSON.parse(localStorage.getItem(cartKey) || '{"items": []}');
+                
+                // Crear producto combo con descuento
+                const comboProduct = {
+                    id: 'combo-familiar',
+                    name: 'Combo Familiar (6 tamales + 2 tortas + dulces)',
+                    price: 150.00, // Precio con descuento aplicado
+                    originalPrice: 180.00,
+                    image: 'images/logo.png',
+                    quantity: 1,
+                    isCombo: true
+                };
+                
+                // Buscar si el combo ya está en el carrito
+                const existingComboIndex = cartData.items.findIndex(item => item.id === 'combo-familiar');
+                
+                if (existingComboIndex >= 0) {
+                    cartData.items[existingComboIndex].quantity += 1;
+                } else {
+                    cartData.items.push(comboProduct);
+                }
+                
+                // Guardar carrito
+                cartData.userId = userId;
+                cartData.timestamp = Date.now();
+                localStorage.setItem(cartKey, JSON.stringify(cartData));
+                
+                console.log('✅ Combo Familiar agregado al carrito con descuento');
+                
+                // Actualizar contador en todas las páginas
+                updateCartCounterGlobal();
+                
+                // Mostrar notificación de éxito
+                showComboNotification('✅ ¡Combo Familiar agregado al carrito! Descuento de $30 aplicado');
+                
+            } catch (error) {
+                console.error('❌ Error al agregar combo:', error);
+                showComboNotification('❌ Error al agregar el combo. Inténtalo de nuevo');
+            }
+        }
+        
+        // Función para mostrar notificaciones del combo
+        function showComboNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: #27ae60;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                z-index: 1001;
+                font-weight: bold;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                max-width: 350px;
+                word-wrap: break-word;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Animar entrada
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Animar salida y remover
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
+        }
+        
+        console.log('🎯 Sistema de promociones cargado');
     </script>
 </body>
 </html>
